@@ -1,0 +1,237 @@
+$def with (result,type,uid,yeshu)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Robots" content="index,follow" />
+
+<link rel="stylesheet" href="static/css/PixelGreen.css" type="text/css" />
+
+<title>notes system</title>
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: 9%
+}
+.STYLE7 {font-size: 18px}
+.STYLE11 {font-size: 100%}
+-->
+.STYLE7 {font-size: 20px}
+
+</style>
+<script type="text/javascript" src="static/js/calendar.js"></script>
+</head>
+
+<body>
+<!-- wrap starts here -->
+<div id="wrap">
+
+	<div id="header"><div id="header-content">				
+	  <h1 id="slogan"><span class="STYLE7">日复一日年复一年的积累，只为不断的</span></h1>    
+	 
+      <h1 id="logo"><span class="gray">----- 前行</span></h1>
+      <ul>
+    <li><a href="/" 
+    $if type == "index":
+        id = "current"
+    >首页</a></li>
+    <li><a href="new">最热</a></li>
+    <li><a href="about"
+    $if type == "about":
+        id = "current"
+    >关于</a></li>
+    $if uid:
+        <li><a href="add"
+        $if type == "add":
+            id = "current"
+        >添加</a></li> 
+        <li><a href="logout">退出</a></li>  
+
+    </ul>
+    </div></div>
+
+<div class="headerphoto"></div>
+				
+	<!-- content-wrap starts here -->
+	<div id="content-wrap"><div id="content">		
+		
+		<div id="sidebar" >
+		
+			<div class="sidebox">
+			
+				<h1>简介</h1>
+				
+			  <p >记录工作中的点点滴滴。</p>	
+		  </div>			
+
+			<div class="sidebox">	
+            <h1 class="clear">日历导航</h1>
+				<div class="Calendar"> 
+<div id="idCalendarPre"><<</div> 
+<div id="idCalendarNext">>></div> 
+<span id="idCalendarYear">2008</span>年 <span id="idCalendarMonth">8</span>月 
+<table cellspacing="0"> 
+<thead> 
+<tr> 
+<td>日</td> 
+<td>一</td> 
+<td>二</td> 
+<td>三</td> 
+<td>四</td> 
+<td>五</td> 
+<td>六</td> 
+</tr> 
+</thead> 
+<tbody id="idCalendar"> 
+</tbody> 
+</table> 
+</div>
+<script type="text/javascript" src="static/js/rili.js"></script>
+    </div>	
+			
+    <div class="sidebox">	
+						
+				<h1>站内搜索</h1>	
+				<form action="/search" class="searchform">
+					<p>
+					<input name="search" class="textbox" type="text" />
+  					<input class="button" value="搜索" type="submit" />
+					</p>			
+				</form>			
+				
+		  </div>
+					
+      </div>
+    $if type == "index":
+        $for datas in result:
+            <div id="main">
+            <div class="post">
+            <a name="TemplateInfo"></a> 
+            
+            <a href="/?date=$datas[0]"><h1>$datas[0]</h1></a>
+            
+            $for i in datas[1]:
+                <blockquote>
+                <p> 
+                $:make_html(i.text)
+                </p>
+                </blockquote>
+                <p class="post-footer align-right">
+                $if uid:<a href="alter?id=$i.nid" class="readmore">修改</a>
+			    <a href="/comment?id=$i.nid" class="comments">评论 ($i.comment)</a>
+			    <span class="date">$i.time</span></p>        
+            </div>
+            </div>
+     $if type == "comment":
+        $for datas in result:
+            <div id="main">
+            <div class="post">
+            <a name="TemplateInfo"></a> 
+            
+            <a href="/?date=$datas[0]"><h1>$datas[0]</h1></a>
+            
+            $for i in datas[1]:
+                <blockquote>
+                <p> 
+                $:make_html(i.text)
+                </p>
+                </blockquote>
+                <p class="post-footer align-right">
+                $if uid:<a href="alter?id=$i.nid" class="readmore">修改</a>
+			    <a href="/comment?id=$i.nid" class="comments">评论 ($i.comment)</a>
+                <span class="date">$i.time</span></p>
+                <ol>
+                $for j in yeshu[1]:
+                    <li>$j.name  $j.datetime</li>
+                    <ul>                    
+                    <li>$:make_html(j.comment)</li> 
+                    </ul>
+                </ol>
+
+                <h3>评论</h3>
+				<form action="/comment" method="post">			
+				<p>			
+				<label>姓名</label>
+				<input name="name" value="匿名" type="text" size="30" />
+				<label>电子邮件</label>
+				<input name="mail" value="保密" type="text" size="30" />
+				<label>评论内容</label>
+				<textarea name="comment" rows="5" cols="5"></textarea>
+				<br />	
+                <input class="button" type="submit" value="发表评论" />
+                <input type="hidden" name="id" value="$i.nid"/>
+				</p>		
+				</form>				
+
+            </div>
+	    </div>
+
+    $elif type == "add":
+        <div id="main">
+        <div class="post">
+        <h3>添加新内容</h3>
+        <form action="/add" method="post">          
+        <p>
+        <textarea id="post_content" name="post_content"rows="5" cols="5"></textarea>
+        <br />
+        <input class="button" value="添加" type="submit" />
+        </p></form>
+        </div>
+        </div>
+    $elif type == "about":
+        <div id="main">
+        <div class="post">
+        <a name="TemplateInfo"></a>
+        <blockquote>
+        <p>笔记系统</p>  
+        </blockquote>
+        </div> 
+        </div>
+    $elif type == "alter":
+        <div id="main">
+        <div class="post">
+        <h3>内容修改</h3>
+        <form action="/alter" method="post">          
+        <p>
+        $for i in result:
+            <blockquote>
+            <textarea id="post_content" name="post_content"rows="5" cols="5">$i.text</textarea>
+            </blockquote>
+            <input type="hidden" name="id" value="$i.nid" />
+        <input class="button" value="修改" type="submit" />
+        </p>
+        </form>
+        </div>
+        </div>
+    <!-- content-wrap ends here -->
+    $if yeshu[0]:
+        <div id="main">
+        <div class="yahoo">
+        $if yeshu[1] == 1:
+            <span class="disabled">&lt;</span>
+        $else:
+            <a href="$(yeshu[2])$(yeshu[1]-1)">&lt;</a>
+        $for i in range(1,yeshu[0]+1):
+            $if i == yeshu[1]:
+                <span class="current">$i</span>
+            $else:
+                <a href="$(yeshu[2])$i">$i</a>
+        $if yeshu[1] == yeshu[0]:
+            <span class="disabled">&gt;</span>
+        $else:
+            <a href="$(yeshu[2])$(yeshu[1]+1)">&gt;</a>
+        </div>
+        </div>
+<!-- fenye ends here -->		
+    </div></div>
+
+<!-- footer starts here -->	
+<div id="footer"><div id="footer-content"></div>
+</div>
+<!-- footer ends here -->
+	
+<!-- wrap ends here -->
+</div>
+
+</body>
+</html>

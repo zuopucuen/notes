@@ -1,0 +1,105 @@
+$def with (result)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Robots" content="index,follow" />
+
+<link rel="stylesheet" href="static/css/PixelGreen.css" type="text/css" />
+
+
+<link rel="stylesheet" href="static/css/jquery.cleditor.css" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.cleditor.min.js"></script>
+
+
+
+<title>test</title>
+	
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: 9%
+}
+.STYLE2 {font-size: 36px}
+.STYLE7 {font-size: 18px}
+-->
+</style>
+</head>
+
+<body>
+<!-- wrap starts here -->
+<div id="wrap">
+
+	<div id="header"><div id="header-content">				
+	  <h1 id="slogan"><span class="STYLE7">日复一日年复一年的积累，只为不断的</span></h1>    
+	 
+	  <h1 id="logo"><span class="gray">----- 前行</span></h1>
+	</div></div>
+	
+	<div class="headerphoto"></div>
+				
+	<!-- content-wrap starts here -->
+	<div id="content-wrap"><div id="content">		
+		
+		<div id="sidebar" >
+		
+			<div class="sidebox">
+			
+				<h1>简介</h1>
+				
+			  <p class="STYLE1">记录工作的点点滴滴。</p>	
+		  </div>			
+
+			<div class="sidebox">	
+			
+			  <h1 class="clear">导航</h1>
+				<ul class="sidemenu">
+					<li></li>
+					<li></li>
+				</ul>	
+				
+			</div>	
+			
+<div class="sidebox">	
+						
+				<h1>站内搜索</h1>	
+				<form action="#" class="searchform">
+					<p>
+					<input name="search_query" class="textbox" type="text" />
+  					<input name="search" class="button" value="搜索" type="submit" />
+					</p>			
+				</form>			
+				
+		  </div>
+					
+		</div>	
+            <div id="main">
+                <div class="post">
+                <h3>添加新内容</h3>
+				<form action="/add" method="post">			
+					<p>
+					<textarea id="post_content" name="post_content"rows="5" cols="5"></textarea>
+					<br />	
+                                        <script type="text/javascript" src="static/js/cleditor.js"></script>
+                                        <textarea id="input" name="input"> </textarea>
+					<input class="button" value="添加" type="submit" />		
+				  </p>		
+				</form>			
+                
+        </div>
+		</div>					
+		
+	<!-- content-wrap ends here -->		
+    </div></div>
+
+<!-- footer starts here -->	
+<div id="footer"><div id="footer-content"></div>
+</div>
+<!-- footer ends here -->
+	
+<!-- wrap ends here -->
+</div>
+
+</body>
+</html>
