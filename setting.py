@@ -1,7 +1,7 @@
 #!/usr/bin/env python27
 #-*- coding:utf-8 -*-
 import web
-import sae.const
+#import sae.const
 
 urls = ('', 'reindex', 
         '/','index',
@@ -16,4 +16,5 @@ urls = ('', 'reindex',
         )
 render = web.template.render("templates/")
 
-db = web.database(dbn='mysql', db = sae.const.MYSQL_DB, host = sae.const.MYSQL_HOST, port = int(sae.const.MYSQL_PORT), user = sae.const.MYSQL_USER, pw = sae.const.MYSQL_PASS)
+#db = web.database(dbn='mysql', db = sae.const.MYSQL_DB, host = sae.const.MYSQL_HOST, port = int(sae.const.MYSQL_PORT), user = sae.const.MYSQL_USER, pw = sae.const.MYSQL_PASS)
+db = web.database(dbn='mysql', db='notes', host='localhost', port=3306, user='root', pw='')

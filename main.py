@@ -61,13 +61,13 @@ class login:
     
     def POST(self):
         a = web.input()
-        b = db.query('''select uid,user,passwd from user where user="%s" and passwd="%s"''' % (a.username,a.password))
+        b = db.query('''select uid,user,passwd from user where user="%s" and passwd=password("%s")''' % (a.username,a.password))
         if b:
             uid = b[0].uid
             session = web.config._session
             session.islogin = True
             session.uid = uid
-#     web.setcookie('uid', uid, 360000)
+            #web.setcookie('uid', uid, 360000)
             return web.seeother("/")
         else:
             return render.error("用户名或密码不正确！")
@@ -104,7 +104,7 @@ class alter:
         uid = getuserid()
         if uid:
             i = web.input()
-            db.query('''update notes set text="%s" where nid="%s"''' % (i.post_content,i.id))
+            db.query('''update notes set text="%s" where id="%s"''' % (i.post_content,i.id))
             raise web.seeother("/")
         else:
             return render.error("请登录")
@@ -142,9 +142,9 @@ class comment:
         
         if 'id' in i:
             nid = i.id
+            print nid
             data = db.query('''select * from notes where nid='%s' ''' % nid)[0]
             r = db.query('''select * from comment where nid='%s' ''' % nid)
-
             result.append([data.date,[data]])
             return render.main(result,"comment",uid,[None,r])
         else:
